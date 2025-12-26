@@ -1,0 +1,41 @@
+services:
+  mysql:
+    image: mysql:8
+    container_name: mysql1
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: mydb6789tyui
+      MYSQL_DATABASE: chuckdb
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin:5.2.1-apache
+    container_name: phpmyadmin1
+    restart: always
+    ports:
+      - "10000:80"
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: mydb6789tyui
+    depends_on:
+      - mysql
+
+  app:
+    build: .
+    container_name: chuck-app
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+    environment:
+      DB_HOST: mysql
+      DB_USER: root
+      DB_PASSWORD: mydb6789tyui
+      DB_NAME: chuckdb
+
+volumes:
+  mysql_data:

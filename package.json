@@ -1,0 +1,10 @@
+{
+  "name": "chuck-app",
+  "version": "1.0.0",
+  "main": "app.js",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "express": "^4.19.0",
+    "mysql2": "^3.9.0"
+  }
+}
